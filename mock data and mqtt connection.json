@@ -1,0 +1,588 @@
+[
+    {
+        "id": "f6f2187d.f17ca8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "9ec3a1280e33ee36",
+        "type": "group",
+        "z": "f6f2187d.f17ca8",
+        "name": "WebSocket Positioning Realtime",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "8f92fd42aaa3aea3",
+            "325d9b65836a0cc9",
+            "144bdf80283f7bca",
+            "396b381790c29e7f",
+            "2e5ecae7bf973616",
+            "e992559c9f89d3d3",
+            "d09e9b8c1db8a5e9",
+            "0bf4949dc6b39aad",
+            "4da632266e204148",
+            "19ec7d352cf611ac",
+            "25fb42d1814f47be",
+            "e3169d27332d6270",
+            "d7836d3e4826c794",
+            "7f0384bbd6bfadbf",
+            "82cfbb83acb4c709",
+            "89b486708aaab0e6"
+        ],
+        "x": 94,
+        "y": 39,
+        "w": 1012,
+        "h": 402
+    },
+    {
+        "id": "1a077d3cc4692fd1",
+        "type": "group",
+        "z": "f6f2187d.f17ca8",
+        "name": "Motor LoraWAN",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "a6a33444f92396fd",
+            "b5f6d56894616388",
+            "adcf666eccea13ac",
+            "db843079bb4bd787",
+            "450e592fcdd3cb13",
+            "f3eaa16fdc3f2d6d",
+            "20e240e2e52deb01",
+            "7125d06ab1b5d276",
+            "b76dfbf3986c76a3"
+        ],
+        "x": 94,
+        "y": 479,
+        "w": 1012,
+        "h": 342
+    },
+    {
+        "id": "6aaa4236c805aaeb",
+        "type": "mqtt-broker",
+        "name": "DigitalTwin-Motor",
+        "broker": "52.220.91.130",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "a5b95810e57c54f0",
+        "type": "websocket-listener",
+        "path": "/ws/motor",
+        "wholemsg": "false"
+    },
+    {
+        "id": "a87e1f1fc3484b93",
+        "type": "websocket-listener",
+        "path": "/ws/plc",
+        "wholemsg": "false"
+    },
+    {
+        "id": "b7d9870c689c2a7f",
+        "type": "websocket-listener",
+        "path": "/ws/amr",
+        "wholemsg": "false"
+    },
+    {
+        "id": "23ea55c3a8cb7fed",
+        "type": "mongodb3",
+        "uri": "mongodb://mongo:27017/motor-diagnostics",
+        "name": "",
+        "options": "",
+        "parallelism": -1
+    },
+    {
+        "id": "a6a33444f92396fd",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "g": "1a077d3cc4692fd1",
+        "name": "Motor-mqtt",
+        "topic": "application/afb7f3ef-8f07-4af1-b44b-759edb3fbaf7/device/+/event/up",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "6aaa4236c805aaeb",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 580,
+        "wires": [
+            [
+                "b5f6d56894616388",
+                "450e592fcdd3cb13"
+            ]
+        ]
+    },
+    {
+        "id": "8f92fd42aaa3aea3",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "g": "9ec3a1280e33ee36",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 200,
+        "wires": [
+            [
+                "325d9b65836a0cc9",
+                "144bdf80283f7bca",
+                "396b381790c29e7f"
+            ]
+        ]
+    },
+    {
+        "id": "b5f6d56894616388",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "1a077d3cc4692fd1",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 340,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "325d9b65836a0cc9",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "9ec3a1280e33ee36",
+        "name": "Mock Motor",
+        "func": "// Motor Mockup Data\nmsg.payload = {\n    device: \"Motor\",\n    timestamp: Date.now(),\n    rpm: Math.floor(Math.random() * (3000 - 1500) + 1500),  // 1500 - 3000 RPM\n    temperature: (Math.random() * (80 - 30) + 30).toFixed(2), // 30 - 80 °C\n    vibration: (Math.random() * 10).toFixed(2) // Random vibration level\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 80,
+        "wires": [
+            [
+                "2e5ecae7bf973616",
+                "7f0384bbd6bfadbf"
+            ]
+        ]
+    },
+    {
+        "id": "144bdf80283f7bca",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "9ec3a1280e33ee36",
+        "name": "Mock PLC",
+        "func": "// Motor Mockup Data\nmsg.payload = {\n    device: \"PLC\",\n    timestamp: Date.now(),\n    pressure: (Math.random() * (80 - 30) + 30).toFixed(2), // 30 - 80 °C\n    temperature: (Math.random() * 10).toFixed(2) // Random vibration level\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 200,
+        "wires": [
+            [
+                "e992559c9f89d3d3",
+                "82cfbb83acb4c709"
+            ]
+        ]
+    },
+    {
+        "id": "396b381790c29e7f",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "9ec3a1280e33ee36",
+        "name": "Mock AMR",
+        "func": "// Motor Mockup Data\nmsg.payload = {\n    device: \"AMR\",\n    timestamp: Date.now(),\n    battery: Math.floor(Math.random() * (3000 - 1500) + 1500),  // 1500 - 3000 RPM\n    speed: (Math.random() * (80 - 30) + 30).toFixed(2), // 30 - 80 °C\n    position: (Math.random() * 10).toFixed(2) // Random vibration level\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 340,
+        "wires": [
+            [
+                "d09e9b8c1db8a5e9",
+                "89b486708aaab0e6"
+            ]
+        ]
+    },
+    {
+        "id": "2e5ecae7bf973616",
+        "type": "websocket out",
+        "z": "f6f2187d.f17ca8",
+        "g": "9ec3a1280e33ee36",
+        "name": "Motor WS",
+        "server": "a5b95810e57c54f0",
+        "client": "",
+        "x": 600,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "e992559c9f89d3d3",
+        "type": "websocket out",
+        "z": "f6f2187d.f17ca8",
+        "g": "9ec3a1280e33ee36",
+        "name": "PLC WS",
+        "server": "a87e1f1fc3484b93",
+        "client": "",
+        "x": 600,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "d09e9b8c1db8a5e9",
+        "type": "websocket out",
+        "z": "f6f2187d.f17ca8",
+        "g": "9ec3a1280e33ee36",
+        "name": "AMR WS",
+        "server": "b7d9870c689c2a7f",
+        "client": "",
+        "x": 600,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "0bf4949dc6b39aad",
+        "type": "websocket in",
+        "z": "f6f2187d.f17ca8",
+        "g": "9ec3a1280e33ee36",
+        "name": "",
+        "server": "a5b95810e57c54f0",
+        "client": "",
+        "x": 790,
+        "y": 180,
+        "wires": [
+            [
+                "25fb42d1814f47be"
+            ]
+        ]
+    },
+    {
+        "id": "4da632266e204148",
+        "type": "websocket in",
+        "z": "f6f2187d.f17ca8",
+        "g": "9ec3a1280e33ee36",
+        "name": "",
+        "server": "a87e1f1fc3484b93",
+        "client": "",
+        "x": 790,
+        "y": 240,
+        "wires": [
+            [
+                "e3169d27332d6270"
+            ]
+        ]
+    },
+    {
+        "id": "19ec7d352cf611ac",
+        "type": "websocket in",
+        "z": "f6f2187d.f17ca8",
+        "g": "9ec3a1280e33ee36",
+        "name": "",
+        "server": "b7d9870c689c2a7f",
+        "client": "",
+        "x": 790,
+        "y": 300,
+        "wires": [
+            [
+                "d7836d3e4826c794"
+            ]
+        ]
+    },
+    {
+        "id": "25fb42d1814f47be",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "9ec3a1280e33ee36",
+        "name": "debug 2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "e3169d27332d6270",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "9ec3a1280e33ee36",
+        "name": "debug 3",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "d7836d3e4826c794",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "9ec3a1280e33ee36",
+        "name": "debug 4",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "7f0384bbd6bfadbf",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "9ec3a1280e33ee36",
+        "name": "debug 5",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "82cfbb83acb4c709",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "9ec3a1280e33ee36",
+        "name": "debug 6",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "89b486708aaab0e6",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "9ec3a1280e33ee36",
+        "name": "debug 7",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "adcf666eccea13ac",
+        "type": "mongodb3 in",
+        "z": "f6f2187d.f17ca8",
+        "g": "1a077d3cc4692fd1",
+        "service": "_ext_",
+        "configNode": "23ea55c3a8cb7fed",
+        "name": "",
+        "collection": "motor-data",
+        "operation": "insertOne",
+        "x": 840,
+        "y": 640,
+        "wires": [
+            [
+                "b76dfbf3986c76a3"
+            ]
+        ]
+    },
+    {
+        "id": "db843079bb4bd787",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "g": "1a077d3cc4692fd1",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 720,
+        "wires": [
+            [
+                "f3eaa16fdc3f2d6d"
+            ]
+        ]
+    },
+    {
+        "id": "450e592fcdd3cb13",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "1a077d3cc4692fd1",
+        "name": "preprocessing data from mqtt",
+        "func": "// Intialize Empty Object\nlet deviceInfoData = flow.get(\"deviceInfoData\") || {}\n\n// Adjust for Thailand zone (UTC+7)\nlet TIME_ZONE_OFFSET = 7;\nlet now = new Date()\nlet currentHour = now.getUTCHours() + TIME_ZONE_OFFSET\nlet currentMinute = now.getMinutes();\nnode.warn(`Current Hour: ${currentHour}, Current Minute: ${currentMinute}`)\n\n// Handle data mapping\nif (msg.payload.object){\n\n    // Define Object Path\n    let accelerometerData = msg.payload.object.payload.Accelerometer\n    let deviceData = msg.payload.object.payload.Device\n    let temphumidData = msg.payload.object.payload.TempHumi\n\n    // Extract the data from Object\n    let accelerometerValues = {\n        \"Peakmg_X_Axis\": accelerometerData[\"X-Axis\"].Peakmg,\n        \"RMSmg_X_Axis\": accelerometerData[\"X-Axis\"].RMSmg,\n        \"Kurtosis_X_Axis\": accelerometerData[\"X-Axis\"].Kurtosis,\n        \"CrestFactor_X_Axis\": accelerometerData[\"X-Axis\"].CrestFactor,\n        \"Skewness_X_Axis\": accelerometerData[\"X-Axis\"].Skewness,\n        \"Peakmg_Y_Axis\": accelerometerData[\"Y-Axis\"].Peakmg,\n        \"RMSmg_Y_Axis\": accelerometerData[\"Y-Axis\"].RMSmg,\n        \"Kurtosis_Y_Axis\": accelerometerData[\"Y-Axis\"].Kurtosis,\n        \"CrestFactor_Y_Axis\": accelerometerData[\"Y-Axis\"].CrestFactor,\n        \"Skewness_Y_Axis\": accelerometerData[\"Y-Axis\"].Skewness,\n        \"Peakmg_Z_Axis\": accelerometerData[\"Z-Axis\"].Peakmg,\n        \"RMSmg_Z_Axis\": accelerometerData[\"Z-Axis\"].RMSmg,\n        \"Kurtosis_Z_Axis\": accelerometerData[\"Z-Axis\"].Kurtosis,\n        \"CrestFactor_Z_Axis\": accelerometerData[\"Z-Axis\"].CrestFactor,\n        \"Skewness_Z_Axis\": accelerometerData[\"Z-Axis\"].Skewness,\n    }\n\n    let deviceValues = {\n        \"BatteryVolt_Device\": deviceData.BatteryVolt,\n        \"PowerSrc_Device\": deviceData.PowerSrc,\n        \"Time_Device\": deviceData.Time,\n        \"Events_Device\": deviceData.Events\n    }\n\n    let tempHumiValues = {\n        \"TempHumi_SenVal\": temphumidData.SenVal,\n        \"TempHumi_Event\": temphumidData.Event,\n        \"TempHumi_Range\": temphumidData.Range,\n        \"TempHumi_Status\": temphumidData.Status\n    }\n\n    let combinedData = { ...accelerometerValues, ...deviceValues, ...tempHumiValues }\n    flow.set(\"deviceInfoData\", combinedData)\n\n    let outputObject = {\n        // Current time in ISO format\n        time: now.toISOString(),\n        data: combinedData\n    }\n\n    msg.payload = outputObject\n    return msg.payload\n} else {\n    return null;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 580,
+        "wires": [
+            [
+                "adcf666eccea13ac",
+                "7125d06ab1b5d276"
+            ]
+        ]
+    },
+    {
+        "id": "f3eaa16fdc3f2d6d",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "1a077d3cc4692fd1",
+        "name": "mock data mqtt",
+        "func": "// Initialize Empty Object\nlet deviceInfoData = flow.get(\"deviceInfoData\") || {};\n\n// Adjust for Thailand zone (UTC+7)\nlet TIME_ZONE_OFFSET = 7;\nlet now = new Date();\nlet currentHour = now.getUTCHours() + TIME_ZONE_OFFSET;\nlet currentMinute = now.getMinutes();\nnode.warn(`Current Hour: ${currentHour}, Current Minute: ${currentMinute}`);\n\nlet accelerometerValues = {\n    \"Peakmg_X_Axis\": (Math.random() * 100).toFixed(2),\n    \"RMSmg_X_Axis\": (Math.random() * 100).toFixed(2),\n    \"Kurtosis_X_Axis\": (Math.random() * 10).toFixed(2),\n    \"CrestFactor_X_Axis\": (Math.random() * 10).toFixed(2),\n    \"Skewness_X_Axis\": (Math.random() * 10).toFixed(2),\n    \"Peakmg_Y_Axis\": (Math.random() * 100).toFixed(2),\n    \"RMSmg_Y_Axis\": (Math.random() * 100).toFixed(2),\n    \"Kurtosis_Y_Axis\": (Math.random() * 10).toFixed(2),\n    \"CrestFactor_Y_Axis\": (Math.random() * 10).toFixed(2),\n    \"Skewness_Y_Axis\": (Math.random() * 10).toFixed(2),\n    \"Peakmg_Z_Axis\": (Math.random() * 100).toFixed(2),\n    \"RMSmg_Z_Axis\": (Math.random() * 100).toFixed(2),\n    \"Kurtosis_Z_Axis\": (Math.random() * 10).toFixed(2),\n    \"CrestFactor_Z_Axis\": (Math.random() * 10).toFixed(2),\n    \"Skewness_Z_Axis\": (Math.random() * 10).toFixed(2)\n};\n\nlet deviceValues = {\n    \"BatteryVolt_Device\": (Math.random() * 5 + 3).toFixed(2), // Random between 3 and 8 volts\n    \"PowerSrc_Device\": [\"Battery\", \"Mains\"][Math.floor(Math.random() * 2)], // Randomly choose one\n    \"Time_Device\": now.toISOString(),\n    \"Events_Device\": Math.floor(Math.random() * 10)  // Random count of events\n};\n\nlet tempHumiValues = {\n    \"TempHumi_SenVal\": (Math.random() * 50).toFixed(2),  // e.g., temperature between 0-50°C\n    \"TempHumi_Event\": [\"Normal\", \"Alert\"][Math.floor(Math.random() * 2)],  // Random event status\n    \"TempHumi_Range\": (Math.random() * 100).toFixed(2),  // e.g., humidity percentage\n    \"TempHumi_Status\": [\"OK\", \"Not OK\"][Math.floor(Math.random() * 2)]\n};\n\nlet combinedData = { ...accelerometerValues, ...deviceValues, ...tempHumiValues };\nflow.set(\"deviceInfoData\", combinedData);\n\nlet outputObject = {\n    time: now.toISOString(),\n    data: combinedData\n};\n\nmsg.payload = outputObject;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 720,
+        "wires": [
+            [
+                "adcf666eccea13ac",
+                "20e240e2e52deb01"
+            ]
+        ]
+    },
+    {
+        "id": "20e240e2e52deb01",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "1a077d3cc4692fd1",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "7125d06ab1b5d276",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "1a077d3cc4692fd1",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "b76dfbf3986c76a3",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "1a077d3cc4692fd1",
+        "name": "debug 10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 780,
+        "wires": []
+    }
+]
