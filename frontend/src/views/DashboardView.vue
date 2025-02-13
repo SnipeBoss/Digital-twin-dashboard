@@ -3,6 +3,7 @@ import { ref, onMounted, onUnmounted } from "vue";
 import DashboardLayout from "@/layouts/DashboardLayout.vue";
 import AreaChart from "@/components/AreaChartComponent.vue";
 import ChartCard from "@/components/ChartCardComponent.vue";
+import LineChart from "@/components/LineChartComponent.vue";
 
 
 // Initialized the websocket
@@ -123,6 +124,17 @@ onUnmounted(() => ws.value && ws.value.close());
       <!-- PLC Data -->
       <ChartCard>
         <AreaChart
+          title="PLC Pressure"
+          :series="[{ name: 'Pressure (Bar)', data: plcData.pressure }]"
+          :timestamps="plcData.timestamps"
+          :lastUpdate="lastUpdate"
+          color="#1E8449"
+        />
+      </ChartCard>
+
+      <!-- PLC Data -->
+      <ChartCard>
+        <LineChart
           title="PLC Pressure"
           :series="[{ name: 'Pressure (Bar)', data: plcData.pressure }]"
           :timestamps="plcData.timestamps"
