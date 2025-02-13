@@ -1,11 +1,12 @@
 <script setup>
 import DashboardLayout from '@/layouts/DashboardLayout.vue';
+import TableComponent from '@/components/TableComponent.vue';
 
 </script>
 
 
 <template>
     <DashboardLayout>
-        Hello
+        <TableComponent />
     </DashboardLayout>
 </template>

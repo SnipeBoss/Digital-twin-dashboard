@@ -4,6 +4,7 @@ import DashboardLayout from "@/layouts/DashboardLayout.vue";
 import AreaChart from "@/components/AreaChartComponent.vue";
 import ChartCard from "@/components/ChartCardComponent.vue";
 import LineChart from "@/components/LineChartComponent.vue";
+import ScatterChart from "@/components/ScatterChartComponent.vue";
 
 
 // Initialized the websocket
@@ -134,7 +135,7 @@ onUnmounted(() => ws.value && ws.value.close());
 
       <!-- PLC Data -->
       <ChartCard>
-        <LineChart
+        <ScatterChart
           title="PLC Pressure"
           :series="[{ name: 'Pressure (Bar)', data: plcData.pressure }]"
           :timestamps="plcData.timestamps"
